@@ -8,23 +8,25 @@ import {decryptZigZag, encryptZigZag} from "./utils/zigzag";
 
 function App() {
   const [CaesarEncryptText, setCaesarEncryptText] = useState( '' ); // Declare a state variable...
-  const [CaesarEncryptKey, setCaesarEncryptKey] = useState(  ); // Declare a state variable...
-  const [caesarEncryptedText, setCaesarEncryptedText] = useState('');
+  const [CaesarEncryptKey, setCaesarEncryptKey] = useState(); // Declare a state variable...
+  const [caesarEncryptedText, setCaesarEncryptedText] = useState( '' );
 
   const [CaesarDecryptText, setCaesarDecryptText] = useState( '' ); // Declare a state variable...
-  const [CaesarDecryptKey, setCaesarDecryptKey] = useState( ); // Declare a state variable...
-  const [caesarDecryptedText, setCaesarDecryptedText] = useState('');
+  const [CaesarDecryptKey, setCaesarDecryptKey] = useState(); // Declare a state variable...
+  const [caesarDecryptedText, setCaesarDecryptedText] = useState( '' );
 
+
+  const [RouteMethodMod, setRouteMethodMod] = useState( 0 ); // Declare a state variable...
 
   const [RouteEncryptText, setRouteEncryptText] = useState( '' ); // Declare a state variable...
-  const [RouteEncryptKeyX, setRouteEncryptKeyX] = useState(  ); // Declare a state variable...
-  const [RouteEncryptKeyY, setRouteEncryptKeyY] = useState(  ); // Declare a state variable...
-  const [routeEncryptedText, setRouteEncryptedText] = useState('');
+  const [RouteEncryptKeyX, setRouteEncryptKeyX] = useState(); // Declare a state variable...
+  const [RouteEncryptKeyY, setRouteEncryptKeyY] = useState(); // Declare a state variable...
+  const [routeEncryptedText, setRouteEncryptedText] = useState( '' );
 
 
   const [RouteDecryptText, setRouteDecryptText] = useState( '' ); // Declare a state variable...
-  const [RouteDecryptKeyX, setRouteDecryptKeyX] = useState(  ); // Declare a state variable...
-  const [RouteDecryptKeyY, setRouteDecryptKeyY] = useState(  ); // Declare a state variable...
+  const [RouteDecryptKeyX, setRouteDecryptKeyX] = useState(); // Declare a state variable...
+  const [RouteDecryptKeyY, setRouteDecryptKeyY] = useState(); // Declare a state variable...
   const [routeDecryptedText, setRouteDecryptedText] = useState('');
 
   const [yerDegistirmeAlphabet, setYerDegistirmeAlphabet] = useState(yerDegistirmeCreateAlphabet());
@@ -94,7 +96,9 @@ function App() {
           value={CaesarDecryptKey} // ...force the input's value to match the state variable...
           onChange={e => setCaesarDecryptKey( parseInt( e.target.value ) )} // ... and update the state variable on any edits!
         /></label>
-        <button style={{marginLeft:"10px",marginRight:"10px",marginTop:"10px"}} onClick={()=>setCaesarDecryptedText(caesarDecrypt( CaesarDecryptText, CaesarDecryptKey ))}>Decrypt</button>
+        <button style={{ marginLeft: "10px", marginRight: "10px", marginTop: "10px" }}
+                onClick={() => setCaesarDecryptedText( caesarDecrypt( CaesarDecryptText, CaesarDecryptKey ) )}>Decrypt
+        </button>
 
         {(caesarDecryptedText !== '') &&
           <p>çıktı: {caesarDecryptedText}</p>}
@@ -102,6 +106,32 @@ function App() {
       <div style={{ display: "flex", flexDirection: "column", width: "100%" }}>
 
         <h1>Rota</h1>
+        <hr width={"80%"}/>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <label>
+            Sola : <input
+            type={"radio"}
+            name={"RouteMethodMod"}
+            value={1} // ...force the input's value to match the state variable...
+            onChange={e => setRouteMethodMod( parseInt( e.target.value ) )} // ... and update the state variable on any edits!
+
+          />
+          </label>
+          {" "}
+          <label>
+            Sağa :<input
+            type={"radio"}
+            name={"RouteMethodMod"}
+            defaultChecked
+            value={0} // ...force the input's value to match the state variable...
+            onChange={e => setRouteMethodMod( parseInt( e.target.value ) )} // ... and update the state variable on any edits!
+          />
+
+          </label>
+
+        </div>
+
+
         <hr width={"80%"}/>
         <label>
           Cümle: <input
@@ -124,7 +154,9 @@ function App() {
           value={RouteEncryptKeyY} // ...force the input's value to match the state variable...
           onChange={e => setRouteEncryptKeyY( parseInt( e.target.value ) )} // ... and update the state variable on any edits!
         /></label>
-        <button style={{marginLeft:"10px",marginRight:"10px",marginTop:"10px"}} onClick={()=>setRouteEncryptedText(rotaEncrypt( RouteEncryptText, RouteEncryptKeyX, RouteEncryptKeyY, 0 ))}>Encrypt</button>
+        <button style={{ marginLeft: "10px", marginRight: "10px", marginTop: "10px" }}
+                onClick={() => setRouteEncryptedText( rotaEncrypt( RouteEncryptText, RouteEncryptKeyX, RouteEncryptKeyY, RouteMethodMod ) )}>Encrypt
+        </button>
 
         { (routeEncryptedText !== '') &&
           <p>çıktı: {routeEncryptedText}</p>}
@@ -151,10 +183,10 @@ function App() {
           value={RouteDecryptKeyY} // ...force the input's value to match the state variable...
           onChange={e => setRouteDecryptKeyY( parseInt( e.target.value ) )} // ... and update the state variable on any edits!
         /></label>
-        <button style={{marginLeft:"10px",marginRight:"10px",marginTop:"10px"}} onClick={()=>setRouteDecryptedText(rotaDecrypt( RouteDecryptText, RouteDecryptKeyX, RouteDecryptKeyY, 0 ))}>Decrypt</button>
+        <button style={{marginLeft:"10px",marginRight:"10px",marginTop:"10px"}} onClick={()=>setRouteDecryptedText(rotaDecrypt( RouteDecryptText, RouteDecryptKeyX, RouteDecryptKeyY, RouteMethodMod))}>Decrypt</button>
 
-        { (routeDecryptedText !== '') &&
-          <p>çıktı: {rotaDecrypt( RouteDecryptText, RouteDecryptKeyX, RouteDecryptKeyY, 0 )}</p>}
+        {(routeDecryptedText !== '') &&
+          <p>çıktı: {routeDecryptedText}</p>}
 
 
       </div>

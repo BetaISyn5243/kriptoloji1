@@ -1,11 +1,13 @@
 
-export function permuteBlockEncrypt(sentence,key){
+export function permuteBlockEncrypt(sentence,key,shuffleKey1){
     let finalSentence = ""
     let temp = sentence.split("")
 
     let originalKey = Array.from({ length: key }, (value, index) => index);
     console.log("Orginal Key: ",originalKey)
     let shuffleKey = Array.from({ length: key }, (value, index) => index).sort(() => Math.random() - 0.5);
+    if (shuffleKey1)
+        shuffleKey=shuffleKey1.split("").map(x=>parseInt(x))
     console.log("Shuffled Key: ",shuffleKey)
     alert(shuffleKey)
     while ( temp.length % key !== 0 ) temp.push("a")

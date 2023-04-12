@@ -55,6 +55,7 @@ function App() {
 
   const [permuteBlockEncryptText, setPermuteBlockEncryptText] = useState(''); // Declare a state variable...
   const [permuteBlockEncryptKey, setPermuteBlockEncryptKey] = useState(); // Declare a state variable...
+  const [permuteBlockEncryptKeyB, setPermuteBlockEncryptKeyB] = useState(''); // Declare a state variable...
   const [permuteBlockEncryptedText, setPermuteBlockEncryptedText] = useState('');
 
   const [permuteBlockDecryptText, setPermuteBlockDecryptText] = useState(''); // Declare a state variable...
@@ -333,9 +334,15 @@ function App() {
             type={"number"}
             value={permuteBlockEncryptKey} // ...force the input's value to match the state variable...
             onChange={e => setPermuteBlockEncryptKey(parseInt(e.target.value))} // ... and update the state variable on any edits!
+          /></label><hr width={"30%"}/>
+          <label>
+            Key: <input
+            key={0}
+            value={permuteBlockEncryptKeyB} // ...force the input's value to match the state variable...
+            onChange={e => setPermuteBlockEncryptKeyB(e.target.value)} // ... and update the state variable on any edits!
           /></label>
           <button style={{marginLeft: "10px", marginRight: "10px", marginTop: "10px"}}
-                  onClick={() => setPermuteBlockEncryptedText(permuteBlockEncrypt(permuteBlockEncryptText, permuteBlockEncryptKey))}>Encrypt
+                  onClick={() => setPermuteBlockEncryptedText(permuteBlockEncrypt(permuteBlockEncryptText, permuteBlockEncryptKey,permuteBlockEncryptKeyB))}>Encrypt
           </button>
 
           {(permuteBlockEncryptedText !== '') &&

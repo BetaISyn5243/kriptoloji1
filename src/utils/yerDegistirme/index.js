@@ -3,7 +3,7 @@ export function yerDegistirmeCreateAlphabet() {
     const lowerA = "abcçdefgğhiıjklmnoöprsştuüvyz".split( "" )
     return lowerA.sort( (a, b) => 0.5 - Math.random() ).join( "" );
 }
-export function yerDegistirmeEncrypt(sentence, key) {
+export function encryptYerDegistirme(sentence, key) {
     // kodlama için alfabe tanımlıyoruz
     const lowerA = "abcçdefgğhiıjklmnoöprsştuüvyz"
 
@@ -22,7 +22,7 @@ export function yerDegistirmeEncrypt(sentence, key) {
     return res.join( "" )
 }
 
-export function yerDegistirmeDecrypt(sentence, key) {
+export function decryptYerDegistirme(sentence, key) {
     // kodlama için alfabe tanımlıyoruz
     const lowerA = "abcçdefgğhiıjklmnoöprsştuüvyz"
 

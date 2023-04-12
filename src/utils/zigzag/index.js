@@ -1,5 +1,4 @@
 export function encryptZigZag(text, key) {
-    while (text.length % key !== 0 ) text+='x'
     let rail = new Array(key).fill().map(() => new Array(text.length).fill('\n'));
 
     let dir_down = false;

@@ -172,7 +172,8 @@ export function rotaDecrypt(sentence, x, y, mod) {
         for ( let i = 0; i > y; i++ ) {
             console.log( matrix.at( i ).join( "" ) )
         }
-    } else if ( mod === 1 ) {
+    }
+    else if ( mod === 1 ) {
         let sayac = 0;
         let row = 0;
         let col = x - 1;

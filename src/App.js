@@ -10,22 +10,24 @@ import {decryptVigenere, encryptVigenere, generateKey} from "./utils/vigenere";
 import {HillCipher} from "./utils/hill";
 
 function App() {
-  const [CaesarEncryptText, setCaesarEncryptText] = useState(''); // Declare a state variable...
+  const [CaesarEncryptText, setCaesarEncryptText] = useState( '' ); // Declare a state variable...
   const [CaesarEncryptKey, setCaesarEncryptKey] = useState(); // Declare a state variable...
-  const [caesarEncryptedText, setCaesarEncryptedText] = useState('');
+  const [caesarEncryptedText, setCaesarEncryptedText] = useState( '' );
 
-  const [CaesarDecryptText, setCaesarDecryptText] = useState(''); // Declare a state variable...
+  const [CaesarDecryptText, setCaesarDecryptText] = useState( '' ); // Declare a state variable...
   const [CaesarDecryptKey, setCaesarDecryptKey] = useState(); // Declare a state variable...
-  const [caesarDecryptedText, setCaesarDecryptedText] = useState('');
+  const [caesarDecryptedText, setCaesarDecryptedText] = useState( '' );
 
 
-  const [RouteEncryptText, setRouteEncryptText] = useState(''); // Declare a state variable...
+  const [RouteMethodMod, setRouteMethodMod] = useState( 0 ); // Declare a state variable...
+
+  const [RouteEncryptText, setRouteEncryptText] = useState( '' ); // Declare a state variable...
   const [RouteEncryptKeyX, setRouteEncryptKeyX] = useState(); // Declare a state variable...
   const [RouteEncryptKeyY, setRouteEncryptKeyY] = useState(); // Declare a state variable...
-  const [routeEncryptedText, setRouteEncryptedText] = useState('');
+  const [routeEncryptedText, setRouteEncryptedText] = useState( '' );
 
 
-  const [RouteDecryptText, setRouteDecryptText] = useState(''); // Declare a state variable...
+  const [RouteDecryptText, setRouteDecryptText] = useState( '' ); // Declare a state variable...
   const [RouteDecryptKeyX, setRouteDecryptKeyX] = useState(); // Declare a state variable...
   const [RouteDecryptKeyY, setRouteDecryptKeyY] = useState(); // Declare a state variable...
   const [routeDecryptedText, setRouteDecryptedText] = useState('');
@@ -107,88 +109,112 @@ function App() {
           {(caesarEncryptedText !== '') &&
             <p>çıktı: {caesarEncryptedText}</p>}
 
-          <h1>Decode</h1>
-          <hr width={"60%"}/>
-          <label>
-            Cümle: <input
-            value={CaesarDecryptText} // ...force the input's value to match the state variable...
-            onChange={e => setCaesarDecryptText(e.target.value)} // ... and update the state variable on any edits!
-          /></label>
-          <hr width={"30%"}/>
-          <label>
-            Key: <input
-            key={1}
-            type={"number"}
-            value={CaesarDecryptKey} // ...force the input's value to match the state variable...
-            onChange={e => setCaesarDecryptKey(parseInt(e.target.value))} // ... and update the state variable on any edits!
-          /></label>
-          <button style={{marginLeft: "10px", marginRight: "10px", marginTop: "10px"}}
-                  onClick={() => setCaesarDecryptedText(caesarDecrypt(CaesarDecryptText, CaesarDecryptKey))}>Decrypt
-          </button>
+        <h1>Decode</h1>
+        <hr width={"60%"}/>
+        <label>
+          Cümle: <input
+          value={CaesarDecryptText} // ...force the input's value to match the state variable...
+          onChange={e => setCaesarDecryptText( e.target.value )} // ... and update the state variable on any edits!
+        /></label>
+        <hr width={"30%"}/>
+        <label>
+          Key: <input
+          key={1}
+          type={"number"}
+          value={CaesarDecryptKey} // ...force the input's value to match the state variable...
+          onChange={e => setCaesarDecryptKey( parseInt( e.target.value ) )} // ... and update the state variable on any edits!
+        /></label>
+        <button style={{ marginLeft: "10px", marginRight: "10px", marginTop: "10px" }}
+                onClick={() => setCaesarDecryptedText( caesarDecrypt( CaesarDecryptText, CaesarDecryptKey ) )}>Decrypt
+        </button>
 
           {(caesarDecryptedText !== '') &&
             <p>çıktı: {caesarDecryptedText}</p>}
         </div>
         <div style={{display: "flex", flexDirection: "column", width: "100%"}}>
 
-          <h1>Rota</h1>
-          <hr width={"80%"}/>
+        <h1>Rota</h1>
+        <hr width={"80%"}/>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <label>
-            Cümle: <input
-            value={RouteEncryptText} // ...force the input's value to match the state variable...
-            onChange={e => setRouteEncryptText(e.target.value)} // ... and update the state variable on any edits!
-          /></label>
-          <hr width={"30%"}/>
-          <label>
-            Key: <input
-            key={0}
-            type={"number"}
-            value={RouteEncryptKeyX} // ...force the input's value to match the state variable...
-            onChange={e => setRouteEncryptKeyX(parseInt(e.target.value))} // ... and update the state variable on any edits!
-          /></label>
-          <hr width={"30%"}/>
-          <label>
-            Key: <input
-            key={0}
-            type={"number"}
-            value={RouteEncryptKeyY} // ...force the input's value to match the state variable...
-            onChange={e => setRouteEncryptKeyY(parseInt(e.target.value))} // ... and update the state variable on any edits!
-          /></label>
-          <button style={{marginLeft: "10px", marginRight: "10px", marginTop: "10px"}}
-                  onClick={() => setRouteEncryptedText(rotaEncrypt(RouteEncryptText, RouteEncryptKeyX, RouteEncryptKeyY, 0))}>Encrypt
-          </button>
+            Sola : <input
+            type={"radio"}
+            name={"RouteMethodMod"}
+            value={1} // ...force the input's value to match the state variable...
+            onChange={e => setRouteMethodMod( parseInt( e.target.value ) )} // ... and update the state variable on any edits!
 
-          {(routeEncryptedText !== '') &&
-            <p>çıktı: {routeEncryptedText}</p>}
-          <h1>Decode</h1>
-          <hr width={"60%"}/>
+          />
+          </label>
+          {" "}
           <label>
-            Cümle: <input
-            value={RouteDecryptText} // ...force the input's value to match the state variable...
-            onChange={e => setRouteDecryptText(e.target.value)} // ... and update the state variable on any edits!
-          /></label>
-          <hr width={"30%"}/>
-          <label>
-            Key: <input
-            key={0}
-            type={"number"}
-            value={RouteDecryptKeyX} // ...force the input's value to match the state variable...
-            onChange={e => setRouteDecryptKeyX(parseInt(e.target.value))} // ... and update the state variable on any edits!
-          /></label>
-          <hr width={"30%"}/>
-          <label>
-            Key: <input
-            key={0}
-            type={"number"}
-            value={RouteDecryptKeyY} // ...force the input's value to match the state variable...
-            onChange={e => setRouteDecryptKeyY(parseInt(e.target.value))} // ... and update the state variable on any edits!
-          /></label>
-          <button style={{marginLeft: "10px", marginRight: "10px", marginTop: "10px"}}
-                  onClick={() => setRouteDecryptedText(rotaDecrypt(RouteDecryptText, RouteDecryptKeyX, RouteDecryptKeyY, 0))}>Decrypt
-          </button>
+            Sağa :<input
+            type={"radio"}
+            name={"RouteMethodMod"}
+            defaultChecked
+            value={0} // ...force the input's value to match the state variable...
+            onChange={e => setRouteMethodMod( parseInt( e.target.value ) )} // ... and update the state variable on any edits!
+          />
 
-          {(routeDecryptedText !== '') &&
-            <p>çıktı: {rotaDecrypt(RouteDecryptText, RouteDecryptKeyX, RouteDecryptKeyY, 0)}</p>}
+          </label>
+
+        </div>
+
+
+        <hr width={"80%"}/>
+        <label>
+          Cümle: <input
+          value={RouteEncryptText} // ...force the input's value to match the state variable...
+          onChange={e => setRouteEncryptText( e.target.value )} // ... and update the state variable on any edits!
+        /></label>
+        <hr width={"30%"}/>
+        <label>
+          Key: <input
+          key={0}
+          type={"number"}
+          value={RouteEncryptKeyX} // ...force the input's value to match the state variable...
+          onChange={e => setRouteEncryptKeyX( parseInt( e.target.value ) )} // ... and update the state variable on any edits!
+        /></label>
+        <hr width={"30%"}/>
+        <label>
+          Key: <input
+          key={0}
+          type={"number"}
+          value={RouteEncryptKeyY} // ...force the input's value to match the state variable...
+          onChange={e => setRouteEncryptKeyY( parseInt( e.target.value ) )} // ... and update the state variable on any edits!
+        /></label>
+        <button style={{ marginLeft: "10px", marginRight: "10px", marginTop: "10px" }}
+                onClick={() => setRouteEncryptedText( rotaEncrypt( RouteEncryptText, RouteEncryptKeyX, RouteEncryptKeyY, RouteMethodMod ) )}>Encrypt
+        </button>
+
+        { (routeEncryptedText !== '') &&
+          <p>çıktı: {routeEncryptedText}</p>}
+        <h1>Decode</h1>
+        <hr width={"60%"}/>
+        <label>
+          Cümle: <input
+          value={RouteDecryptText} // ...force the input's value to match the state variable...
+          onChange={e => setRouteDecryptText( e.target.value )} // ... and update the state variable on any edits!
+        /></label>
+        <hr width={"30%"}/>
+        <label>
+          Key: <input
+          key={0}
+          type={"number"}
+          value={RouteDecryptKeyX} // ...force the input's value to match the state variable...
+          onChange={e => setRouteDecryptKeyX( parseInt( e.target.value ) )} // ... and update the state variable on any edits!
+        /></label>
+        <hr width={"30%"}/>
+        <label>
+          Key: <input
+          key={0}
+          type={"number"}
+          value={RouteDecryptKeyY} // ...force the input's value to match the state variable...
+          onChange={e => setRouteDecryptKeyY( parseInt( e.target.value ) )} // ... and update the state variable on any edits!
+        /></label>
+        <button style={{marginLeft:"10px",marginRight:"10px",marginTop:"10px"}} onClick={()=>setRouteDecryptedText(rotaDecrypt( RouteDecryptText, RouteDecryptKeyX, RouteDecryptKeyY, RouteMethodMod))}>Decrypt</button>
+
+        {(routeDecryptedText !== '') &&
+          <p>çıktı: {routeDecryptedText}</p>}
 
 
         </div>
